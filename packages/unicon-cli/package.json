@@ -1,0 +1,13 @@
+{
+  "name": "unicon-cli",
+  "version": "0.0.3",
+  "license": "MIT",
+  "bin": {
+    "unicon": "./bin/unicon.js"
+  },
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "meow": "^5.0.0",
+    "unicon": "^0.2.1"
+  }
+}

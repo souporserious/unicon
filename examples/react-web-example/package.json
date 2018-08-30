@@ -1,0 +1,22 @@
+{
+  "name": "react-web",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "1.1.4",
+    "unicon-cli": "^0.0.3",
+    "unicon-transformer-json": "^0.0.1"
+  },
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "unicon-react": "^0.0.4"
+  },
+  "scripts": {
+    "icons": "unicon figma 5XaqhenkjvPmJprGZMPr4j --output src --name icons --transformer json",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "react-native-example",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+  "scripts": {
+    "icons": "unicon figma 5XaqhenkjvPmJprGZMPr4j --name icons --transformer json",
+    "start": "react-native-scripts start",
+    "eject": "react-native-scripts eject",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "jest-expo"
+  },
+  "devDependencies": {
+    "jest-expo": "~27.0.0",
+    "react-native-scripts": "1.14.0",
+    "react-test-renderer": "16.3.1",
+    "unicon-cli": "^0.0.3",
+    "unicon-transformer-json": "^0.0.1"
+  },
+  "dependencies": {
+    "expo": "^27.0.1",
+    "react": "16.3.1",
+    "react-native": "~0.55.2",
+    "react-native-svg": "^6.5.0",
+    "unicon-react": "^0.0.4"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "unicon-react",
+  "version": "0.0.4",
+  "source": "lib/index.js",
+  "react-native": "lib/react-native.js",
+  "main": "dist/react-unicon.js",
+  "umd:main": "dist/react-unicon.umd.js",
+  "module": "dist/react-unicon.m.js",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "scripts": {
+    "build": "babel src --out-dir lib --plugins @babel/plugin-proposal-object-rest-spread && microbundle",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "microbundle": "^0.6.0"
+  },
+  "peerDependencies": {
+    "react": ">0.13.0"
+  }
+}
