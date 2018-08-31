@@ -1,12 +1,37 @@
 # 🦄 unicon
 
-Wrangle SVGs from your favorite design tool.
+Wrangle SVGs from your favorite design tool. Works with Figma, Sketch, and
+anything else that can export svgs.
 
-## Usage
+## ☢️ Warning
 
-Coming soon 😇 check out the [examples](/examples) folder for now.
+API may be in flux until an official V1. Please use at your own risk.
 
-## Thanks
+## 📦 Packages
+
+### [unicon](/packages/unicon)
+
+A set of functions to source SVG data from _any_ design tool.
+
+### [unicon-transformer-json](/packages/unicon-transformer-json)
+
+Clean and transform SVG data into JSON fragments.
+
+### [unicon-cli](/packages/unicon-cli)
+
+Source data and use transformers to create a file of individually exported SVG
+data fragments.
+
+### [unicon-react](/packages/unicon-react)
+
+Universal SVG rendering in React.
+
+## 🤠 Examples
+
+Check out the [examples](/examples) folder for working examples in React and
+React Native.
+
+## 🙏 Thanks
 
 This project is built on the shoulders of giants and wouldn't be possible
 without an amazing community. Huge thanks to the following people:
