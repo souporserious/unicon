@@ -31,6 +31,7 @@ const cli = meow(
   
   Options
   --name         name of the generated JSON file
+  --page         name of the page to get components from (defaults to all pages)
   --output       output directory (defaults to cwd)
   --transformer  path to transform function
   --group        whether or not the data should be grouped by pages/sub-directory
@@ -39,6 +40,9 @@ const cli = meow(
   {
     flags: {
       name: {
+        type: 'string',
+      },
+      page: {
         type: 'string',
       },
       output: {
@@ -76,6 +80,7 @@ if (!command || !source) {
     folder: getSvgsFromFolder,
   }[command]
   const toolOptions = {
+    page: options.page,
     group: options.group,
   }
 

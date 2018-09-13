@@ -55,16 +55,19 @@ function traverseLayers(children, layers = {}) {
 
 function getSvgsFromFigma(
   fileId,
-  { group = false, transformSvg = svg => svg } = {}
+  { page: pageToUse = false, group = false, transformSvg = svg => svg } = {}
 ) {
   if (!client) {
     throw new Error(
       'You must set a Figma token before using this function. Please see the docs for setFigmaToken usage.'
     )
   }
+
   return client.file(fileId).then(({ data }) => {
     const pages = data.document.children.reduce((collection, page) => {
-      collection[page.name] = traverseLayers(page.children)
+      if (!pageToUse || page.name === pageToUse) {
+        collection[page.name] = traverseLayers(page.children)
+      }
       return collection
     }, {})
     const componentIds = Object.keys(pages).reduce((ids, key) => {
