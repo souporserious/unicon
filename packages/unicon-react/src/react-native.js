@@ -25,7 +25,7 @@ function renderChildren({ tag, props, children }) {
       ? children.constructor === Array
         ? Children.toArray(children.map(renderChildren))
         : children
-      : null
+      : null,
   )
 }
 
@@ -49,7 +49,7 @@ function Graphic({ children, source, scale = 1, ...restProps }) {
     },
     typeof children === 'function'
       ? children(childrenToRender)
-      : childrenToRender
+      : childrenToRender,
   )
 }
 

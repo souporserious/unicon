@@ -28,7 +28,7 @@ const cli = meow(
 
   Folder
   $ unicon folder <path-to-folder-of-svgs>
-  
+
   Options
   --name         name of the generated JSON file
   --page         name of the page to get components from (defaults to all pages)
@@ -58,7 +58,7 @@ const cli = meow(
         type: 'boolean',
       },
     },
-  }
+  },
 )
 
 const [command, source] = cli.input
@@ -67,7 +67,7 @@ const options = Object.assign(
     name: 'components',
     output: '',
   },
-  cli.flags
+  cli.flags,
 )
 options.output = path.resolve(options.output)
 
@@ -99,13 +99,13 @@ if (!command || !source) {
     } catch (err) {
       try {
         toolOptions.transformSvg = require(path.resolve(
-          `./node_modules/unicon-transformer-${options.transformer}`
+          `./node_modules/unicon-transformer-${options.transformer}`,
         ))
       } catch (err) {
         console.error(
           `Transformer could not be found. Make sure path is valid or try installing ${`unicon-transformer-${
             options.transformer
-          }`}`
+          }`}`,
         )
       }
     }
@@ -118,7 +118,7 @@ if (!command || !source) {
         output: options.output,
         group: options.group,
         svgs,
-      })
+      }),
     )
   if (options.watch) {
     const watchSource = {

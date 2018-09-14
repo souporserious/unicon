@@ -16,8 +16,8 @@ async function getSvgsFromDirectory(path, transformSvg) {
   const files = readdirSync(path)
   const svgs = await Promise.all(
     files.map(name =>
-      transformSvg(readFileSync(`${path}/${name}`).toString('utf8'))
-    )
+      transformSvg(readFileSync(`${path}/${name}`).toString('utf8')),
+    ),
   )
   return files.reduce((collection, file, index) => {
     const name = file.replace('.svg', '')
@@ -28,14 +28,14 @@ async function getSvgsFromDirectory(path, transformSvg) {
 
 async function getSvgsFromFolder(
   path,
-  { group = false, transformSvg = svg => svg } = {}
+  { group = false, transformSvg = svg => svg } = {},
 ) {
   if (group) {
     const directories = getDirectories(path)
     const svgs = await Promise.all(
       directories.map(directory =>
-        getSvgsFromDirectory(directory, transformSvg)
-      )
+        getSvgsFromDirectory(directory, transformSvg),
+      ),
     )
     return directories.reduce((collection, directory, index) => {
       collection[basename(directory)] = svgs[index]

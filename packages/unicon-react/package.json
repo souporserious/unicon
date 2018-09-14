@@ -19,9 +19,15 @@
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "microbundle": "^0.6.0"
+    "microbundle": "^0.6.0",
+    "prettier": "1.14.2"
   },
   "peerDependencies": {
     "react": ">0.13.0"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all"
   }
 }

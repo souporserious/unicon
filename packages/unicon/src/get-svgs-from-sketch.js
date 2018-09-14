@@ -24,7 +24,7 @@ async function getSvgsFromSketch(path, { group, transformSvg } = {}) {
         layers: page.layers
           .filter(layer => layer['<class>'] === 'MSArtboardGroup')
           .map(layer => layer.objectID),
-      }))
+      })),
     )
     await Promise.all(
       pages.map(async page => {
@@ -33,15 +33,15 @@ async function getSvgsFromSketch(path, { group, transformSvg } = {}) {
           `export artboards ${path}`,
           `--items=${page.layers.join(',')}`,
           `--output=${subDirectory}`,
-          `--formats=svg`
+          `--formats=svg`,
         )
-      })
+      }),
     )
   } else {
     await SketchTool(
       `export artboards ${path}`,
       `--output=${temporaryDirectory}`,
-      `--formats=svg`
+      `--formats=svg`,
     )
   }
   return getSvgsFromFolder(temporaryDirectory, {
