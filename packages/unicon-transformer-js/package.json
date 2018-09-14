@@ -1,5 +1,5 @@
 {
-  "name": "unicon-transformer-json",
+  "name": "unicon-transformer-js",
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
