@@ -55,11 +55,11 @@ function traverseLayers(children, layers = {}) {
 
 function getSvgsFromFigma(
   fileId,
-  { page: pageToUse = false, group = false, transformSvg = svg => svg } = {}
+  { page: pageToUse = false, group = false, transformSvg = svg => svg } = {},
 ) {
   if (!client) {
     throw new Error(
-      'You must set a Figma token before using this function. Please see the docs for setFigmaToken usage.'
+      'You must set a Figma token before using this function. Please see the docs for setFigmaToken usage.',
     )
   }
 
@@ -86,11 +86,11 @@ function getSvgsFromFigma(
           console.log('Successfully fetched components ✅')
           console.log('Fetching svgs... 🌀')
           return Promise.all(
-            componentIds.map(key => images[key]).map(getSvgFromUrl)
+            componentIds.map(key => images[key]).map(getSvgFromUrl),
           )
         })
         .then(svgs =>
-          Promise.all(svgs.map(svg => transformSvg(incrementFilterId(svg))))
+          Promise.all(svgs.map(svg => transformSvg(incrementFilterId(svg)))),
         )
         .then(svgs => {
           console.log('Successfully fetched svgs ✅')

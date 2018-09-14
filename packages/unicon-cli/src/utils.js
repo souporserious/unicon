@@ -12,9 +12,9 @@ function writeSVGFile(output, filename, data) {
           `export const ${pascalcase(key)} = ${util.inspect(data[key], {
             breakLength: Infinity,
             depth: null,
-          })}`
+          })}`,
       )
-      .join('\n')
+      .join('\n'),
   )
 }
 
