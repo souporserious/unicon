@@ -30,7 +30,7 @@ const cli = meow(
   $ unicon folder <path-to-folder-of-svgs>
 
   Options
-  --name         name of the generated JSON file
+  --name         name of the generated file (if applicable to the transformer)
   --page         name of the page to get components from (defaults to all pages)
   --output       output directory (defaults to cwd)
   --transformer  path to transform function
@@ -64,12 +64,17 @@ const cli = meow(
 const [command, source] = cli.input
 const options = Object.assign(
   {
-    name: 'components',
+    name: 'svgs',
     output: '',
   },
   cli.flags,
 )
 options.output = path.resolve(options.output)
+
+// make sure our output directory exists
+if (options.output !== '' && !fs.existsSync(options.output)) {
+  fs.mkdirSync(options.output)
+}
 
 if (!command || !source) {
   cli.showHelp(0)
@@ -93,12 +98,14 @@ if (!command || !source) {
     }
   }
 
+  let transformer = require('./transformerFiles')
+
   if (options.transformer) {
     try {
-      toolOptions.transformSvg = require(path.resolve(options.transformer))
+      transformer = require(path.resolve(options.transformer))
     } catch (err) {
       try {
-        toolOptions.transformSvg = require(path.resolve(
+        transformer = require(path.resolve(
           `./node_modules/unicon-transformer-${options.transformer}`,
         ))
       } catch (err) {
@@ -112,14 +119,18 @@ if (!command || !source) {
   }
 
   const generateFileFromSvg = () =>
-    getSvgsFromTool(source, toolOptions).then(svgs =>
-      generateImportsFromSvgs({
-        name: options.name,
-        output: options.output,
-        group: options.group,
-        svgs,
-      }),
+    getSvgsFromTool(source, toolOptions).then(
+      svgs => {
+        transformer(svgs, options)
+      },
+      // generateImportsFromSvgs({
+      //   name: options.name,
+      //   output: options.output,
+      //   group: options.group,
+      //   svgs,
+      // }),
     )
+
   if (options.watch) {
     const watchSource = {
       figma: watchFigmaFile,

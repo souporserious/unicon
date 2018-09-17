@@ -1,28 +1,21 @@
-const svgson = require('svgson-next').default
+const fs = require('fs')
+const path = require('path')
+const pascalcase = require('pascalcase')
+const util = require('util')
 
-function walkChildren({ attributes, children, name }) {
-  const shape = {
-    tag: name,
-    props: attributes,
-  }
-  if (children && children.length > 0) {
-    shape.children =
-      children[0].type === 'text'
-        ? children[0].value
-        : children.map(walkChildren)
-  }
-  return shape
+async function transformSvgs(svgs, { output, name }) {
+  fs.writeFileSync(
+    path.resolve(output, name + '.js'),
+    Object.keys(svgs)
+      .map(
+        key =>
+          `export const ${pascalcase(name)} = ${util.inspect(svgs[key], {
+            breakLength: Infinity,
+            depth: null,
+          })}`,
+      )
+      .join('\n'),
+  )
 }
 
-async function transformSvg(svg) {
-  const optimizedSvg = await optimizeSvg(svg)
-  const json = await svgson(svg, { camelcase: true })
-  const { width, height } = getSize(json)
-  return {
-    width: parseInt(width, 10),
-    height: parseInt(height, 10),
-    children: json.children.map(walkChildren),
-  }
-}
-
-module.exports = transformSvg
+module.exports = transformSvgs

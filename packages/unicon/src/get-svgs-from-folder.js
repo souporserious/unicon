@@ -12,7 +12,7 @@ function watchFolder(source, cb) {
   return watch(source + '**/*.svg', cb)
 }
 
-async function getSvgsFromDirectory(path, transformSvg) {
+async function getSvgsFromDirectory(path) {
   const files = readdirSync(path)
   const svgs = await Promise.all(
     files.map(name =>
@@ -21,7 +21,7 @@ async function getSvgsFromDirectory(path, transformSvg) {
         readFileSync(`${path}/${name}`).toString('utf8'),
       ),
     ),
-  ).then(svgs => transformSvg(svgs))
+  )
 
   return files.reduce((collection, file, index) => {
     const name = file.replace('.svg', '')
@@ -30,23 +30,18 @@ async function getSvgsFromDirectory(path, transformSvg) {
   }, {})
 }
 
-async function getSvgsFromFolder(
-  path,
-  { group = false, transformSvg = svg => svg } = {},
-) {
+async function getSvgsFromFolder(path, { group = false } = {}) {
   if (group) {
     const directories = getDirectories(path)
     const svgs = await Promise.all(
-      directories.map(directory =>
-        getSvgsFromDirectory(directory, transformSvg),
-      ),
+      directories.map(directory => getSvgsFromDirectory(directory)),
     )
     return directories.reduce((collection, directory, index) => {
       collection[basename(directory)] = svgs[index]
       return collection
     }, {})
   } else {
-    return getSvgsFromDirectory(path, transformSvg)
+    return getSvgsFromDirectory(path)
   }
 }
 

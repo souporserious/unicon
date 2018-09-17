@@ -55,6 +55,7 @@ async function processSvg(name, svg) {
     width: parseInt(width, 10),
     height: parseInt(height, 10),
     children: json.children.map(walkChildren),
+    raw: optimizedSvg,
   }
 }
 

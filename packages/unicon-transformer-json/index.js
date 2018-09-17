@@ -1,11 +1,9 @@
 const fs = require('fs')
 const path = require('path')
 
-async function transformSvgs(svgs) {
-  console.log(JSON.stringify(svgs, null, 2))
-
+async function transformSvgs(svgs, { output, name }) {
   fs.writeFileSync(
-    path.resolve('', 'icons.json'),
+    path.resolve(output, name + '.json'),
     JSON.stringify(svgs, null, 2),
   )
 }
