@@ -4,9 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "pascalcase": "^0.1.1",
-    "svgo": "^1.0.5",
-    "svgson-next": "^4.1.5"
+    "pascalcase": "^0.1.1"
   },
   "devDependencies": {
     "prettier": "1.14.2"

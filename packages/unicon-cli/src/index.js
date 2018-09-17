@@ -14,7 +14,6 @@ const {
   watchSketchFile,
   watchFolder,
 } = require('unicon')
-const { generateImportsFromSvgs } = require('./utils')
 
 const cli = meow(
   `
@@ -119,17 +118,9 @@ if (!command || !source) {
   }
 
   const generateFileFromSvg = () =>
-    getSvgsFromTool(source, toolOptions).then(
-      svgs => {
-        transformer(svgs, options)
-      },
-      // generateImportsFromSvgs({
-      //   name: options.name,
-      //   output: options.output,
-      //   group: options.group,
-      //   svgs,
-      // }),
-    )
+    getSvgsFromTool(source, toolOptions).then(svgs => {
+      transformer(svgs, options)
+    })
 
   if (options.watch) {
     const watchSource = {
