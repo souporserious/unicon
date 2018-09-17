@@ -1,6 +1,6 @@
 const { lstatSync, readdirSync, readFileSync } = require('fs')
 const { join, basename } = require('path')
-const { watch } = require('./utils')
+const { watch, processSvg } = require('./utils')
 
 const isDirectory = source => lstatSync(source).isDirectory()
 const getDirectories = source =>
@@ -16,9 +16,13 @@ async function getSvgsFromDirectory(path, transformSvg) {
   const files = readdirSync(path)
   const svgs = await Promise.all(
     files.map(name =>
-      transformSvg(readFileSync(`${path}/${name}`).toString('utf8')),
+      processSvg(
+        name.replace('.svg', ''),
+        readFileSync(`${path}/${name}`).toString('utf8'),
+      ),
     ),
-  )
+  ).then(svgs => transformSvg(svgs))
+
   return files.reduce((collection, file, index) => {
     const name = file.replace('.svg', '')
     collection[name] = svgs[index]

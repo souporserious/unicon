@@ -1,23 +1,4 @@
-const svgo = require('svgo')
 const svgson = require('svgson-next').default
-
-function optimizeSvg(svg) {
-  return new svgo({
-    multipass: true,
-  })
-    .optimize(svg)
-    .then(({ data }) => data)
-}
-
-function getSize(json) {
-  if (json.attributes.viewBox) {
-    const [, , width, height] = json.attributes.viewBox.split(' ')
-    return { width, height }
-  } else {
-    const { width, height } = json.attributes
-    return { width, height }
-  }
-}
 
 function walkChildren({ attributes, children, name }) {
   const shape = {

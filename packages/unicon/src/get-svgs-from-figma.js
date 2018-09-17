@@ -1,6 +1,6 @@
 const Figma = require('figma-js')
 const { compareAsc } = require('date-fns')
-const { getSvgFromUrl } = require('./utils')
+const { getSvgFromUrl, processSvg } = require('./utils')
 
 const lastModified = {}
 let filterId = -1
@@ -74,6 +74,12 @@ function getSvgsFromFigma(
       const components = pages[key]
       return [...ids, ...Object.keys(components).map(key => components[key])]
     }, [])
+
+    const componentNames = Object.keys(pages).reduce((names, key) => {
+      const components = pages[key]
+      return [...names, ...Object.keys(components).map(key => key)]
+    }, [])
+
     if (componentIds.length > 0) {
       console.log('Fetching components... 🌀')
       return client
@@ -90,8 +96,13 @@ function getSvgsFromFigma(
           )
         })
         .then(svgs =>
-          Promise.all(svgs.map(svg => transformSvg(incrementFilterId(svg)))),
+          Promise.all(
+            svgs.map((svg, i) =>
+              processSvg(componentNames[i], incrementFilterId(svg)),
+            ),
+          ),
         )
+        .then(svgs => transformSvg(svgs))
         .then(svgs => {
           console.log('Successfully fetched svgs ✅')
           if (group) {
