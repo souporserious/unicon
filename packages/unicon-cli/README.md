@@ -51,7 +51,7 @@ Folder to output parsed SVGs. Defaults to `cwd`.
 
 When `true`, groups returned SVG data by pages or sub directories.
 
-### `—transform`
+### `—transformer`
 
 Path to a file that exports a method to transform each SVG. If using a package
 like [`unicon-transformer-json`](../unicon-transformer-json), you can omit
