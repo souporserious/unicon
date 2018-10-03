@@ -327,9 +327,9 @@ svgo@^1.0.5:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-svgson-next@^4.1.5:
-  version "4.1.5"
-  resolved "https://registry.yarnpkg.com/svgson-next/-/svgson-next-4.1.5.tgz#7eb43d2c98dbe46ee21497165d7ae986c2125be0"
+svgson-next@4.1.6:
+  version "4.1.6"
+  resolved "https://registry.yarnpkg.com/svgson-next/-/svgson-next-4.1.6.tgz#2729674e14e43ddf4c550fecccf1837bcacd8055"
   dependencies:
     clean-deep "3.0.2"
     deep-rename-keys "^0.2.1"

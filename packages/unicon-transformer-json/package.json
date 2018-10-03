@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "svgo": "^1.0.5",
-    "svgson-next": "^4.1.5"
+    "svgson-next": "4.1.6"
   },
   "devDependencies": {
     "prettier": "1.14.2"
