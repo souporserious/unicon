@@ -10,37 +10,35 @@ function optimizeSvg(svg) {
 }
 
 function getSize(json) {
-  if (json.attributes.viewBox) {
-    const [, , width, height] = json.attributes.viewBox.split(' ')
+  if (json.props.viewBox) {
+    const [, , width, height] = json.props.viewBox.split(' ')
     return { width, height }
   } else {
-    const { width, height } = json.attributes
+    const { width, height } = json.props
     return { width, height }
   }
-}
-
-function walkChildren({ attributes, children, name }) {
-  const shape = {
-    tag: name,
-    props: attributes,
-  }
-  if (children && children.length > 0) {
-    shape.children =
-      children[0].type === 'text'
-        ? children[0].value
-        : children.map(walkChildren)
-  }
-  return shape
 }
 
 async function transformSvg(svg) {
   const optimizedSvg = await optimizeSvg(svg)
-  const json = await svgson(svg, { camelcase: true })
+  const json = await svgson(svg, {
+    camelcase: true,
+    transformNode: ({ attributes, children, name }) => ({
+      tag: name,
+      props: attributes,
+      ...(children && children.length > 0
+        ? {
+            children:
+              children[0].type === 'text' ? children[0].value : children,
+          }
+        : {}),
+    }),
+  })
   const { width, height } = getSize(json)
   return {
     width: parseInt(width, 10),
     height: parseInt(height, 10),
-    children: json.children.map(walkChildren),
+    children: json.children,
   }
 }
 
