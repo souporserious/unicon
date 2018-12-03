@@ -53,16 +53,21 @@ When `true`, groups returned SVG data by pages or sub directories.
 
 ### `—transform`
 
-Path to a file that exports a method to transform each SVG. If using a package
-like [`unicon-transformer-json`](../unicon-transformer-json), you can omit
-`unicon-transformer` and just pass the name of the transformer, and it will be
-resolved properly.
+Without this option unicon will just directly place a `.svg` for each icon found in the `output` directory.
+
+To change this behavior provide a installed unicon transfomer name or a path to a file that exports a method to transform each SVG.
+
+If using a package like [`unicon-transformer-json`](../unicon-transformer-json), you can omit `unicon-transformer` and just pass the name of the transformer, and it will be resolved properly.
+
+for example:
+
+`unicon figma XXXX --transformer json`
 
 ### `—watch`
 
 Builds SVG exports file on source directory/file update.
 
-## Usage with NPM scripts
+## Usage within `package.json` scripts
 
 ```json
 {
@@ -70,11 +75,4 @@ Builds SVG exports file on source directory/file update.
     "icons": "unicon figma 5XaqhenkjvPmJprGZMFw2ge --name icons --transformer json"
   }
 }
-```
-
-### Example Output
-
-```js
-export const Archive = { width: 24, height: 24, }, children: [...] }
-export const Trash = { width: 24, height: 24, children: [...] }
 ```
