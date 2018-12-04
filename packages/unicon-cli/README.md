@@ -17,17 +17,15 @@ npm install unicon-cli --save-dev
 
 ### Figma
 
-`unicon figma <figma-id>`
+Accepts a Figma file id. Collects all of the components in the file. the `--page` option can be used to limit to a single page within the figma file.
 
-Accepts a Figma file id. Collects all of the components in the file.
+`unicon figma <figma-id>`
 
 #### Required setup
 
-`FIGMA_TOKEN=<personal-access-token>`
+You must include a [personal access token](https://www.figma.com/developers/docs#auth-dev-token) in a `.env` at the root of your project or as an environment variable.
 
-You must include a
-[personal access token](https://www.figma.com/developers/docs#auth-dev-token) in
-a `.env` at the root of your project or as an environment variable.
+`FIGMA_TOKEN=<personal-access-token>`
 
 ### Sketch
 
@@ -46,6 +44,12 @@ Accepts a path to a directory of svgs.
 ### `—output`
 
 Folder to output parsed SVGs. Defaults to `cwd`.
+
+### `-page`
+
+Page within the file to use.
+
+Currently works with `figma`.
 
 ### `—group`
 
