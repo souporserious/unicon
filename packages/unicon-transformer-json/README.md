@@ -1,17 +1,25 @@
 # unicon-transformer-json
 
-Uses [svgo](https://github.com/svg/svgo) to cleanup each svg, as well as
-[svgson](https://github.com/elrumordelaluz/svgson-next/) to produce a JSON
-fragment for each svg.
+Takes SVGs imported via unicon and creates a single JSON object with keys for objects containing SVG details.
+
+Current provides:
+
+- name
+- width
+- height
+- children
+  - tag
+  - props
+- raw (the raw svg source)
 
 ### Install
 
 ```
-yarn add unicon-transformer-js --dev
+yarn add unicon-transformer-json --dev
 ```
 
 ```
-npm install unicon-transformer-js --save-dev
+npm install unicon-transformer-json --save-dev
 ```
 
 ### Usage
@@ -24,7 +32,7 @@ When using with [unicon-cli](../unicon-cli) you can omit the
 ```json
 {
   "scripts": {
-    "icons": "unicon figma 5XaqhenkjvPmJprGZMFw2ge --name icons --transformer js"
+    "icons": "unicon figma 5XaqhenkjvPmJprGZMFw2ge --name icons --transformer json"
   }
 }
 ```
@@ -33,7 +41,7 @@ When using with [unicon-cli](../unicon-cli) you can omit the
 
 ```js
 import { getSvgsFromFigma } from 'unicon'
-import svgToJson from 'unicon-transformer-js'
+import svgToJson from 'unicon-transformer-json'
 
 getSvgsFromFigma('5XaqhenkjvPmJprGZMFw2ge', {
   transformSvg: svgToJson,
@@ -44,11 +52,23 @@ getSvgsFromFigma('5XaqhenkjvPmJprGZMFw2ge', {
 
 ```json
 {
-  "tag": "path",
-  "props": {
-    "d": "M15.5 14h-.79l-.28-.27A6.471 6.471...",
-    "fill": "rainbow"
+  "IconName": {
+    "name": "IconName",
+    "width": 64,
+    "height": 64,
+    "children": [
+      {
+        "tag": "path",
+        "props": {
+          "fillRule": "evenodd",
+          "clipRule": "evenodd",
+          "d": "M15.5 14h-.79l-.28-.27A6.471 6.471...",
+          "fill": "#8492A6"
+        }
+      }
+    ],
+    "raw": "<svg width=\"64\" height=\"64\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M15.5 14h-.79l-.28-.27A6.471 6.471...\" fill=\"#8492A6\"/></svg>"
   },
-  "children": ["..."]
+  ...
 }
 ```
