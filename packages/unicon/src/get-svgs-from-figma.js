@@ -81,7 +81,12 @@ function getSvgsFromFigma(
     }, [])
 
     if (componentIds.length > 0) {
-      console.log('Fetching components... 🌀')
+      console.log(`Fetching components from ${fileId}... 🌀`)
+
+      if (pageToUse) {
+        console.log(`Limiting to page ${pageToUse}... 📄`)
+      }
+
       return client
         .fileImages(fileId, {
           ids: componentIds,
@@ -97,9 +102,10 @@ function getSvgsFromFigma(
         })
         .then(svgs =>
           Promise.all(
-            svgs.map((svg, i) =>
-              processSvg(componentNames[i], incrementFilterId(svg)),
-            ),
+            svgs.map((svg, i) => {
+              console.log(`Adding component "${componentNames[i]}"`)
+              return processSvg(componentNames[i], incrementFilterId(svg))
+            }),
           ),
         )
         .then(svgs => transformSvg(svgs))
