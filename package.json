@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "scripts": {
+    "unicon": "yarn workspace unicon",
+    "unicon-cli": "yarn workspace unicon-cli"
+  },
+  "workspaces": [
+    "examples/*",
+    "packages/*"
+  ]
+}
