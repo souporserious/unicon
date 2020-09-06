@@ -17,10 +17,10 @@ class App extends Component {
         <Controls
           scaleAuto={scaleAuto}
           onScaleAutoChange={() =>
-            this.setState(state => ({ scaleAuto: !state.scaleAuto }))
+            this.setState((state) => ({ scaleAuto: !state.scaleAuto }))
           }
           scaleAmount={scaleAmount}
-          onScaleAmountChange={e =>
+          onScaleAmountChange={(e) =>
             this.setState({ scaleAmount: +e.target.value })
           }
         />
@@ -33,7 +33,7 @@ class App extends Component {
             backgroundColor: '#3FA86B',
           }}
         >
-          {Object.keys(Icons).map(key => (
+          {Object.keys(Icons).map((key) => (
             <div
               key={key}
               style={{

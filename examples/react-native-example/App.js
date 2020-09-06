@@ -11,7 +11,7 @@ export default class App extends React.Component {
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
       >
-        {Object.keys(Icons).map(key => (
+        {Object.keys(Icons).map((key) => (
           <View key={key} style={styles.child}>
             <Graphic source={Icons[key]} scale={4} fill="none" />
             <Text style={{ marginTop: 16 }}>{key}</Text>

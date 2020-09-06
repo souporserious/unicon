@@ -19,35 +19,35 @@ async function getSvgsFromSketch(path, { group, transformSvg } = {}) {
   const temporaryDirectory = await makeDirectory('./.svgs')
   if (group) {
     const pages = await SketchTool(`dump ${path}`).then(({ stdout }) =>
-      JSON.parse(stdout).pages.map(page => ({
+      JSON.parse(stdout).pages.map((page) => ({
         name: page.name,
         layers: page.layers
-          .filter(layer => layer['<class>'] === 'MSArtboardGroup')
-          .map(layer => layer.objectID),
-      })),
+          .filter((layer) => layer['<class>'] === 'MSArtboardGroup')
+          .map((layer) => layer.objectID),
+      }))
     )
     await Promise.all(
-      pages.map(async page => {
+      pages.map(async (page) => {
         const subDirectory = await makeDirectory(`./.svgs/${page.name}`)
         return SketchTool(
           `export artboards ${path}`,
           `--items=${page.layers.join(',')}`,
           `--output=${subDirectory}`,
-          `--formats=svg`,
+          `--formats=svg`
         )
-      }),
+      })
     )
   } else {
     await SketchTool(
       `export artboards ${path}`,
       `--output=${temporaryDirectory}`,
-      `--formats=svg`,
+      `--formats=svg`
     )
   }
   return getSvgsFromFolder(temporaryDirectory, {
     group,
     transformSvg,
-  }).then(svgs => {
+  }).then((svgs) => {
     deleteDirectory(temporaryDirectory)
     return svgs
   })

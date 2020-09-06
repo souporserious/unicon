@@ -42,7 +42,7 @@ function incrementFilterId(str) {
 
 function traverseLayers(children, layers = {}) {
   if (children) {
-    children.forEach(child => {
+    children.forEach((child) => {
       if (child.type === 'COMPONENT') {
         layers[child.name] = child.id
       } else if (child.children) {
@@ -55,11 +55,11 @@ function traverseLayers(children, layers = {}) {
 
 function getSvgsFromFigma(
   fileId,
-  { page: pageToUse = false, group = false, transformSvg = svg => svg } = {},
+  { page: pageToUse = false, group = false, transformSvg = (svg) => svg } = {}
 ) {
   if (!client) {
     throw new Error(
-      'You must set a Figma token before using this function. Please see the docs for setFigmaToken usage.',
+      'You must set a Figma token before using this function. Please see the docs for setFigmaToken usage.'
     )
   }
 
@@ -72,7 +72,7 @@ function getSvgsFromFigma(
     }, {})
     const componentIds = Object.keys(pages).reduce((ids, key) => {
       const components = pages[key]
-      return [...ids, ...Object.keys(components).map(key => components[key])]
+      return [...ids, ...Object.keys(components).map((key) => components[key])]
     }, [])
     if (componentIds.length > 0) {
       console.log('Fetching components... 🌀')
@@ -86,13 +86,13 @@ function getSvgsFromFigma(
           console.log('Successfully fetched components ✅')
           console.log('Fetching svgs... 🌀')
           return Promise.all(
-            componentIds.map(key => images[key]).map(getSvgFromUrl),
+            componentIds.map((key) => images[key]).map(getSvgFromUrl)
           )
         })
-        .then(svgs =>
-          Promise.all(svgs.map(svg => transformSvg(incrementFilterId(svg)))),
+        .then((svgs) =>
+          Promise.all(svgs.map((svg) => transformSvg(incrementFilterId(svg))))
         )
-        .then(svgs => {
+        .then((svgs) => {
           console.log('Successfully fetched svgs ✅')
           if (group) {
             let startIndex = 0

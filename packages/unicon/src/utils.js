@@ -8,14 +8,14 @@ function getSvgFromUrl(url) {
         'Content-Type': 'images/svg+xml',
       },
     })
-    .then(response => response.data)
+    .then((response) => response.data)
 }
 
 function watch(source, cb) {
   const watcher = chokidar.watch(source, {
     persistent: true,
   })
-  watcher.on('change', path => {
+  watcher.on('change', (path) => {
     console.log('file changed')
     cb()
   })

@@ -37,7 +37,7 @@ import svgToJson from 'unicon-transformer-json'
 
 getSvgsFromFigma('5XaqhenkjvPmJprGZMFw2ge', {
   transformSvg: svgToJson,
-}).then(svgs => console.log(svgs))
+}).then((svgs) => console.log(svgs))
 ```
 
 ### Example Output

@@ -58,7 +58,7 @@ const cli = meow(
         type: 'boolean',
       },
     },
-  },
+  }
 )
 
 const [command, source] = cli.input
@@ -67,7 +67,7 @@ const options = Object.assign(
     name: 'components',
     output: '',
   },
-  cli.flags,
+  cli.flags
 )
 options.output = path.resolve(options.output)
 
@@ -99,26 +99,24 @@ if (!command || !source) {
     } catch (err) {
       try {
         toolOptions.transformSvg = require(path.resolve(
-          `./node_modules/unicon-transformer-${options.transformer}`,
+          `./node_modules/unicon-transformer-${options.transformer}`
         ))
       } catch (err) {
         console.error(
-          `Transformer could not be found. Make sure path is valid or try installing ${`unicon-transformer-${
-            options.transformer
-          }`}`,
+          `Transformer could not be found. Make sure path is valid or try installing ${`unicon-transformer-${options.transformer}`}`
         )
       }
     }
   }
 
   const generateFileFromSvg = () =>
-    getSvgsFromTool(source, toolOptions).then(svgs =>
+    getSvgsFromTool(source, toolOptions).then((svgs) =>
       generateImportsFromSvgs({
         name: options.name,
         output: options.output,
         group: options.group,
         svgs,
-      }),
+      })
     )
   if (options.watch) {
     const watchSource = {

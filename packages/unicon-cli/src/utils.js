@@ -8,19 +8,19 @@ function writeSVGFile(output, filename, data) {
     path.resolve(output, filename + '.js'),
     Object.keys(data)
       .map(
-        key =>
+        (key) =>
           `export const ${pascalcase(key)} = ${util.inspect(data[key], {
             breakLength: Infinity,
             depth: null,
-          })}`,
+          })}`
       )
-      .join('\n'),
+      .join('\n')
   )
 }
 
 function generateImportsFromSvgs({ name, output, svgs, group }) {
   if (group) {
-    Object.keys(svgs).forEach(key => writeSVGFile(output, key, svgs[key]))
+    Object.keys(svgs).forEach((key) => writeSVGFile(output, key, svgs[key]))
   } else {
     writeSVGFile(output, name, svgs)
   }
