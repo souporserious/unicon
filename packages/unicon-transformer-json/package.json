@@ -6,13 +6,5 @@
   "dependencies": {
     "svgo": "^1.3.2",
     "svgson-next": "4.3.0"
-  },
-  "devDependencies": {
-    "prettier": "2.1.1"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "all"
   }
 }
